@@ -1,44 +1,83 @@
-import React from 'react';
-import { Box, Button, Checkbox, FormControl, FormLabel, Input, Stack, Text, Heading, Flex } from '@chakra-ui/react';
-import { FaMicrosoft } from 'react-icons/fa';
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import "./SignupForm.css";
 
-const SignUpForm = () => {
+function SignupForm(props) {
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [termsChecked, setTermsChecked] = useState(false); // State for checkbox
+
+  function submitHandler(event) {
+    event.preventDefault();
+    console.log("Submit Handler Called");
+
+    // Check if terms are agreed upon
+    if (!termsChecked) {
+      alert("Please agree to terms and conditions.");
+      return;
+    }
+
+    const enteredFirstName = firstNameRef.current.value;
+    const enteredLastName = lastNameRef.current.value;
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+
+    const userData = {
+      firstName: enteredFirstName,
+      lastName: enteredLastName,
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+
+    props.onAddUser(userData);
+  }
+
+  function handleCheckboxChange(event) {
+    setTermsChecked(event.target.checked);
+  }
+
   return (
-    <Box p={8} borderWidth={1} borderRadius="lg" boxShadow="lg">
-      <Heading color="#528745" as="h1" size="lg" mb={6}>Sign Up</Heading>
-      <Text mb={2}>Enter your credentials to continue</Text>
-      <Button   leftIcon={<img src={`${process.env.PUBLIC_URL}/office-365-icon.svg`} alt="Microsoft Icon" style={{ height: '1.2em', marginRight: '8px' }} />}
-        colorScheme="gray"
-        mb={4}
-        width="full"
-      >Sign up with Microsoft 365</Button>
-      <Text  boxShadow=""textAlign="center" mb={4}>OR</Text>
-      <Stack spacing={4}>
-        <Flex gap={4}>
-          <FormControl>
-            <FormLabel>First Name</FormLabel>
-            <Input type="text" placeholder="First Name" />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Last Name</FormLabel>
-            <Input type="text" placeholder="Last Name" />
-          </FormControl>
-        </Flex>
-        <FormControl>
-          <FormLabel>Email Address</FormLabel>
-          <Input type="email" placeholder="Email Address" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Password</FormLabel>
-          <Input type="password" placeholder="Password" />
-          <Text color="gray.500" fontSize="sm">Weak</Text>
-        </FormControl>
-        <Checkbox>Agree with Terms & Conditions</Checkbox>
-        <Button colorScheme="green"  width="full">Sign Up</Button>
-      </Stack>
-      <Text mt={4} textAlign="center">Already have an account?</Text>
-    </Box>
-  );
-};
+    <form className="signup-form" onSubmit={submitHandler}>
+      <div className="form-group">
+        <input
+          type="text"
+          placeholder="First Name"
+          required
+          ref={firstNameRef}
+        />
+        <input type="text" placeholder="Last Name" required ref={lastNameRef} />
+      </div>
+      <input type="email" placeholder="Email Address" required ref={emailRef} />
+      <div className="password-group">
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          ref={passwordRef}
+        />
+      </div>
 
-export default SignUpForm;
+      <div className="checkbox-group">
+        <input
+          type="checkbox"
+          id="terms"
+          className="form-checkbox"
+          checked={termsChecked}
+          onChange={handleCheckboxChange}
+        />
+        <label htmlFor="terms">Agree with Terms &amp; Conditions</label>
+      </div>
+
+      <button type="submit" className="signup-btn">
+        Sign Up
+      </button>
+      <Link to="/signin" style={{ textDecoration: "none" }}>
+        <h2>Already have an account?</h2>
+      </Link>
+    </form>
+  );
+}
+
+export default SignupForm;

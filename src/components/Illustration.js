@@ -1,14 +1,15 @@
+// components/Illustration.js
 import React from 'react';
-import { Box, Image, Text } from '@chakra-ui/react';
+import './Illustration.css';
 
-const Illustration = () => {
+function Illustration() {
   return (
-    <Box p={8} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <Text fontSize="xl" fontWeight="bold">Lorem ipsum dolor sit amet, consectetur</Text>
-      <Text>Lorem ipsum dolor sit amet, consectetur</Text>
-      <Image src={`${process.env.PUBLIC_URL}/img-a2-grid.72f620d8 1.png`} alt="Illustration" mb={4} />
-    </Box>
+    <div className="illustration">
+      <h3>Lorem ipsum dolor sit amet, consectetur</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur</p>
+      <img src={`${process.env.PUBLIC_URL}/img-a2-grid.72f620d8 1.png`} alt="Illustration" />
+    </div>
   );
-};
+}
 
 export default Illustration;
