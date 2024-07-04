@@ -74,7 +74,7 @@ function SignupForm(props) {
         Sign Up
       </button>
       <Link to="/signin" style={{ textDecoration: "none" }}>
-        <h2>Already have an account?</h2>
+        <h4>Already have an account?</h4>
       </Link>
     </form>
   );
