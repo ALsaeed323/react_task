@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignupForm.css";
 
 function SignupForm(props) {
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
   const [termsChecked, setTermsChecked] = useState(false); // State for checkbox
 
   function submitHandler(event) {
@@ -19,19 +21,24 @@ function SignupForm(props) {
       return;
     }
 
-    const enteredFirstName = firstNameRef.current.value;
-    const enteredLastName = lastNameRef.current.value;
-    const enteredEmail = emailRef.current.value;
-    const enteredPassword = passwordRef.current.value;
+    const { firstName, lastName, email, password } = formData;
 
     const userData = {
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-      email: enteredEmail,
-      password: enteredPassword,
+      firstName,
+      lastName,
+      email,
+      password,
     };
 
     props.onAddUser(userData);
+  }
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
   function handleCheckboxChange(event) {
@@ -43,19 +50,37 @@ function SignupForm(props) {
       <div className="form-group">
         <input
           type="text"
+          name="firstName"
           placeholder="First Name"
           required
-          ref={firstNameRef}
+          value={formData.firstName}
+          onChange={handleInputChange}
         />
-        <input type="text" placeholder="Last Name" required ref={lastNameRef} />
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          required
+          value={formData.lastName}
+          onChange={handleInputChange}
+        />
       </div>
-      <input type="email" placeholder="Email Address" required ref={emailRef} />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email Address"
+        required
+        value={formData.email}
+        onChange={handleInputChange}
+      />
       <div className="password-group">
         <input
           type="password"
+          name="password"
           placeholder="Password"
           required
-          ref={passwordRef}
+          value={formData.password}
+          onChange={handleInputChange}
         />
       </div>
 
