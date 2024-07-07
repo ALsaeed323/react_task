@@ -5,8 +5,9 @@ import "./Illustration.css";
 function Illustration() {
   return (
     <div className="illustration">
-      <h3>Lorem ipsum dolor sit amet, consectetur</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur</p>
+<p class="large-text">Lorem ipsum dolor sit amet, consectetur</p>
+<p class="small-text">Lorem ipsum dolor sit amet, consectetur</p>
+
       <div class="loading-indicator">
         <div class="dot active"></div>
         <div class="dot"></div>

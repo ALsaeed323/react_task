@@ -27,4 +27,20 @@
   .dot.active {
     background-color: #333;
   }
+  .large-text {
+    font-family: 'Arial', sans-serif; /* Adjust font family as needed */
+    font-size: 24px; /* Adjust size as needed */
+    color: #333; /* Adjust color as needed */
+    text-align: center; /* Centers the text */
+  }
+  
+  .small-text {
+    font-family: 'Arial', sans-serif; /* Adjust font family as needed */
+    font-size: 14px; /* Adjust size as needed */
+    font-weight: normal; /* Normal font weight */
+    color: #666; /* Adjust color as needed */
+    text-align: center; /* Centers the text */
+  }
+  
+  
   

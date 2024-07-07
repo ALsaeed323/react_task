@@ -82,8 +82,8 @@ function SignupForm(props) {
           value={formData.password}
           onChange={handleInputChange}
         />
+       
       </div>
-
       <div className="checkbox-group">
         <input
           type="checkbox"
@@ -94,12 +94,11 @@ function SignupForm(props) {
         />
         <label htmlFor="terms">Agree with Terms &amp; Conditions</label>
       </div>
-
       <button type="submit" className="signup-btn">
         Sign Up
       </button>
       <Link to="/signin" style={{ textDecoration: "none" }}>
-        <h4>Already have an account?</h4>
+        <p className="sign-link">Already have an account?</p>
       </Link>
     </form>
   );

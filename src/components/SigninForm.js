@@ -29,8 +29,8 @@ function SigninForm({ onSignIn }) {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="form-group">
-        <label>Email:</label>
+      <div className="password-group">
+        <label style={{ padding: '10px', fontFamily: "'Arial', sans-serif" }}>Email:</label>
         <input
           type="email"
           name="email"
@@ -40,8 +40,9 @@ function SigninForm({ onSignIn }) {
           onChange={handleInputChange}
         />
       </div>
-      <div className="form-group">
-        <label>Password:</label>
+      <div className="password-group">
+      <label style={{ padding: '10px', fontFamily: "'Arial', sans-serif" }}>Password:</label>
+
         <input
           type="password"
           name="password"
@@ -51,7 +52,7 @@ function SigninForm({ onSignIn }) {
           onChange={handleInputChange}
         />
       </div>
-      <button type="submit" className="signin-btn">
+      <button  type="submit" className="signin-btn">
         Sign In
       </button>
     </form>
