@@ -1,46 +1,58 @@
-import React, { useRef } from 'react';
+import React, { useState } from "react";
 
 function SigninForm({ onSignIn }) {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   function submitHandler(event) {
     event.preventDefault();
-    const enteredEmail = emailRef.current.value;
-    const enteredPassword = passwordRef.current.value;
+    const { email, password } = formData;
 
-    // Simulate sign-in logic (replace with Firebase Authentication)
     const userData = {
-      email: enteredEmail,
-      password: enteredPassword,
+      email,
+      password,
     };
 
     // Call the prop function to handle sign-in
     onSignIn(userData);
-    
+  }
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
   return (
     <form onSubmit={submitHandler}>
-      
-      <div>
-        
-        <div className="password-group">
-        <div>
+      <div className="form-group">
         <label>Email:</label>
-        <input type="email" placeholder="Email Address" required ref={emailRef} />
-      </div>
-      <label>Password:</label>
         <input
-          type="password"
-          placeholder="Password"
+          type="email"
+          name="email"
+          placeholder="Email Address"
           required
-          ref={passwordRef}
+          value={formData.email}
+          onChange={handleInputChange}
         />
       </div>
+      <div className="form-group">
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={formData.password}
+          onChange={handleInputChange}
+        />
       </div>
-      <button type="submit" className="signup-btn">
-      Sign In
+      <button type="submit" className="signin-btn">
+        Sign In
       </button>
     </form>
   );
