@@ -130,6 +130,7 @@ function SignupForm(props) {
       <button type="submit" className="signup-btn">
         Sign Up
       </button>
+      <div className="or-divider"></div>
       <Link to="/signin" style={{ textDecoration: "none" }}>
         <h4>Already have an account?</h4>
       </Link>
