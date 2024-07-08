@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SignupForm.css";
 
@@ -10,6 +10,7 @@ function SignupForm(props) {
     password: "",
   });
   const [termsChecked, setTermsChecked] = useState(false); // State for checkbox
+  const [passwordStrength, setPasswordStrength] = useState(""); // State for password strength
 
   function submitHandler(event) {
     event.preventDefault();
@@ -44,6 +45,20 @@ function SignupForm(props) {
   function handleCheckboxChange(event) {
     setTermsChecked(event.target.checked);
   }
+
+  const determinePasswordStrength = (password) => {
+    if (password.length < 6) {
+      return "Weak";
+    } else if (password.length >= 6 && password.length < 10) {
+      return "Moderate";
+    } else {
+      return "Strong";
+    }
+  };
+
+  useEffect(() => {
+    setPasswordStrength(determinePasswordStrength(formData.password));
+  }, [formData.password]);
 
   return (
     <form className="signup-form" onSubmit={submitHandler}>
@@ -82,8 +97,25 @@ function SignupForm(props) {
           value={formData.password}
           onChange={handleInputChange}
         />
-       
+        <div className="password-strength" style={ { marginRight: "340px",}}>
+          <div
+            style={{
+              width: "100%",
+              height: "5px",
+              backgroundColor:
+                passwordStrength === "Weak"
+                  ? "red"
+                  : passwordStrength === "Moderate"
+                  ? "orange"
+                  : "green",
+              marginTop: "50px",
+              marginRight: "50px",
+            }}
+          ></div>
+          <span>{passwordStrength}</span>
+        </div>
       </div>
+
       <div className="checkbox-group">
         <input
           type="checkbox"
@@ -94,11 +126,12 @@ function SignupForm(props) {
         />
         <label htmlFor="terms">Agree with Terms &amp; Conditions</label>
       </div>
+
       <button type="submit" className="signup-btn">
         Sign Up
       </button>
       <Link to="/signin" style={{ textDecoration: "none" }}>
-        <p className="sign-link">Already have an account?</p>
+        <h4>Already have an account?</h4>
       </Link>
     </form>
   );
