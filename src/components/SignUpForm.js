@@ -1,103 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./SignupForm.css";
 
 function SignupForm(props) {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-  const [termsChecked, setTermsChecked] = useState(false); // State for checkbox
-  const [passwordStrength, setPasswordStrength] = useState(""); // State for password strength
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const [termsChecked, setTermsChecked] = useState(false);
 
-  function submitHandler(event) {
-    event.preventDefault();
-    console.log("Submit Handler Called");
-
-    // Check if terms are agreed upon
+  const onSubmit = (data) => {
     if (!termsChecked) {
       alert("Please agree to terms and conditions.");
       return;
     }
-
-    const { firstName, lastName, email, password } = formData;
-
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
-
-    props.onAddUser(userData);
-  }
-
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
-
-  function handleCheckboxChange(event) {
-    setTermsChecked(event.target.checked);
-  }
-
-  const determinePasswordStrength = (password) => {
-    if (password.length < 6) {
-      return "Weak";
-    } else if (password.length >= 6 && password.length < 10) {
-      return "Moderate";
-    } else {
-      return "Strong";
-    }
+    props.onAddUser(data);
   };
 
-  useEffect(() => {
-    setPasswordStrength(determinePasswordStrength(formData.password));
-  }, [formData.password]);
+  const password = watch("password");
+
+  const passwordStrength = password ? (
+    password.length < 6
+      ? "Weak"
+      : password.length >= 6 && password.length < 10
+      ? "Moderate"
+      : "Strong"
+  ) : "";
 
   return (
-    <form className="signup-form" onSubmit={submitHandler}>
+    <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <input
           type="text"
-          name="firstName"
           placeholder="First Name"
-          required
-          value={formData.firstName}
-          onChange={handleInputChange}
+          {...register("firstName", { required: "First Name is required" })}
         />
+        {errors.firstName && <p className="error-message">{errors.firstName.message}</p>}
         <input
           type="text"
-          name="lastName"
           placeholder="Last Name"
-          required
-          value={formData.lastName}
-          onChange={handleInputChange}
+          {...register("lastName", { required: "Last Name is required" })}
         />
+        {errors.lastName && <p className="error-message">{errors.lastName.message}</p>}
       </div>
       <input
         type="email"
-        name="email"
         placeholder="Email Address"
-        required
-        value={formData.email}
-        onChange={handleInputChange}
+        {...register("email", {
+          required: "Email Address is required",
+          pattern: {
+            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+            message: "Enter a valid email address"
+          }
+        })}
       />
+      {errors.email && <p className="error-message">{errors.email.message}</p>}
       <div className="password-group">
         <input
           type="password"
-          name="password"
           placeholder="Password"
-          required
-          value={formData.password}
-          onChange={handleInputChange}
+          {...register("password", {
+            required: "Password is required",
+          })}
         />
-        <div className="password-strength" style={ { marginRight: "340px",}}>
+        <div className="password-strength" style={{ marginRight: "340px" }}>
           <div
             style={{
               width: "100%",
@@ -107,7 +71,9 @@ function SignupForm(props) {
                   ? "red"
                   : passwordStrength === "Moderate"
                   ? "orange"
-                  : "green",
+                  : passwordStrength === "Strong"
+                  ? "green"
+                  : "white",
               marginTop: "50px",
               marginRight: "50px",
             }}
@@ -122,7 +88,7 @@ function SignupForm(props) {
           id="terms"
           className="form-checkbox"
           checked={termsChecked}
-          onChange={handleCheckboxChange}
+          onChange={(e) => setTermsChecked(e.target.checked)}
         />
         <label htmlFor="terms">Agree with Terms &amp; Conditions</label>
       </div>

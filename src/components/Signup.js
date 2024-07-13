@@ -10,7 +10,7 @@ function Signup() {
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState('');
 
-  function addUserHandler(userData)  {
+  function addUserHandler(userData) {
     fetch('https://react-5053d-default-rtdb.firebaseio.com/users.json', {
       method: 'POST',
       body: JSON.stringify(userData),
@@ -32,18 +32,17 @@ function Signup() {
   }
 
   return (
-    <div className="signup-container">
-       <Logo/>
+    <div className='signup-container'>
+      <Logo />
       <div className="signup-left">
         <h1>Sign Up</h1>
         <p>Enter your credentials to continue</p>
         <SignupOption />
-        <SignupForm onAddUser={addUserHandler} /> 
+        <SignupForm onAddUser={addUserHandler} />
         {successMessage && <p>{successMessage}</p>}
       </div>
       <div className="signup-right">
         <Illustration />
-
       </div>
     </div>
   );

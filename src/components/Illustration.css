@@ -1,6 +1,9 @@
 /* Illustration.css */
 .illustration {
     text-align: center;
+    height: fit-content;
+    width: 50%;
+    float: right;
   }
   
   .illustration h2 {
@@ -40,6 +43,10 @@
     font-weight: normal; /* Normal font weight */
     color: #666; /* Adjust color as needed */
     text-align: center; /* Centers the text */
+  }
+  .img{
+    height:50px;
+
   }
   
   

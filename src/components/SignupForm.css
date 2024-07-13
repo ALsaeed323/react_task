@@ -40,7 +40,14 @@
     color: #ff6b6b;
   }
   
-  .signup-form input[type="email"], .signup-form input[type="password"] {
+  .signup-form input[type="email"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }
+  .signup-form input[type="password"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 15px;
@@ -71,10 +78,6 @@
     color: #fff;
     cursor: pointer;
   }
-  .signup-form p {
-    text-align: center;
-    margin-top: 15px;
-  }
   .checkbox-group {
     display: flex;
     align-items: center;
@@ -90,7 +93,12 @@
     cursor: pointer;
     position: relative;
   }
-  
+  .error-message {
+    color: red;
+    font-size: 12px; /* Adjust the font size as needed */
+    margin: 0; /* Remove margin to avoid the dot */
+    margin-bottom: 15px;
+  }
   .checkbox-group .form-checkbox:checked {
     background-color: green;
     border-color: green;

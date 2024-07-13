@@ -1,36 +1,58 @@
 /* Signup.css */
 .signup-container {
-    display: flex;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    
-  }
-  
-  .signup-left, .signup-right {
-    padding: 40px;
-  }
-  
-  .signup-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px; 
-    max-width: 500px; /* Set a max-width for better readability */
-  }
-  
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.signup-left, .signup-right {
+  padding: 40px;
+}
+
+.signup-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  max-width: 500px; /* Set a max-width for better readability */
+}
+
+.signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
   .signup-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
+    display: none;
   }
-  h1 {
-    font-family: 'Arial', sans-serif;
-    color: #508445; 
+  .signup-container {
+    display: block;
+    padding-bottom: 180px;
   }
-  
+}
+@media (max-width: 1366px) {
+  .signup-right {
+    display: none;
+  }
+  .signup-left{
+    margin-left: 300px;
+
+  }
+  .signup-container {
+    display: block;
+    padding-bottom: 650px;
+  }
+}
+
+h1 {
+  font-family: 'Arial', sans-serif;
+  color: #508445;
+}
