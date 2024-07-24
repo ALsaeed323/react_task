@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
-import SigninForm from './SigninForm';
-import Illustration from './Illustration';
-import Logo from './Logo';
-import './Signup.css';
+import SigninForm from './SigninForm/SigninForm';
+import Illustration from '../Illustration/Illustration';
+import Logo from '../Logo';
+import '../Signup/Signup.css';
 
 function Signin() {
     const [successMessage, setSuccessMessage] = useState('');
