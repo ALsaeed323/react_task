@@ -33,7 +33,7 @@ const AppRoutes = () => {
           <Route path="/" element={<Navigate to="/signup" />} />
 
           {/* Protected Routes */}
-          <Route path="/" element={<FullLayout />}>
+          {/* <Route path="/" element={<FullLayout />}>
             <Route index element={<Navigate to="/signup" />} />
             <ProtectedRoute path="about" element={<About />} roles={['admin']} />
             <ProtectedRoute path="alerts" element={<Alerts />} roles={['admin']} />
@@ -45,7 +45,7 @@ const AppRoutes = () => {
             <ProtectedRoute path="forms" element={<Forms />} roles={['admin']} />
             <ProtectedRoute path="breadcrumbs" element={<Breadcrumbs />} roles={['admin']} />
           </Route>
-          <ProtectedRoute path="/profile" element={<UserProfile />} roles={['user']} />
+          <ProtectedRoute path="/profile" element={<UserProfile />} roles={['user']} /> */}
         </Routes>
       </Suspense>
     </AuthProvider>
