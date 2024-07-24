@@ -12,7 +12,9 @@ function SignupForm(props) {
       alert("Please agree to terms and conditions.");
       return;
     }
-    props.onAddUser(data);
+    // Add the role as 'user' by default
+    const userData = { ...data, role: 'user' };
+    props.onAddUser(userData);
   };
 
   const password = watch("password");
