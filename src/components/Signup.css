@@ -38,16 +38,13 @@
   }
   .signup-container {
     display: block;
-    padding-bottom: 180px;
+   
   }
   
 }
 @media (max-width: 1366px) {
-  .signup-right {
-    display: none;
-  }
+
   .signup-container {
-    display: block;
     padding-bottom: 650px;
   }
 }
