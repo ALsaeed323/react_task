@@ -1,5 +1,6 @@
 import React from 'react';
-import './SignupOption.css';
+import '../SignupOption/SignupOption.css';
+
 
 function SignupOption() {
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "./SignupForm.css";
+import "../SignupForm/SignupForm.css";
 
 function SignupForm(props) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -12,7 +12,9 @@ function SignupForm(props) {
       alert("Please agree to terms and conditions.");
       return;
     }
-    props.onAddUser(data);
+    // Add the role as 'user' by default
+    const userData = { ...data, role: 'user' };
+    props.onAddUser(userData);
   };
 
   const password = watch("password");

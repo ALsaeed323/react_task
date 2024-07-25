@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import SignupOption from './SignupOption';
-import SignupForm from './SignUpForm';
-import Illustration from './Illustration';
+import SignupOption from './SignupOption/SignupOption';
+import SignupForm from './SignupForm/SignUpForm';
+import Illustration from '../Illustration/Illustration';
 import { useNavigate } from 'react-router-dom';
-import Logo from './Logo';
+import Logo from '../Logo';
 import './Signup.css';
 
 function Signup() {
