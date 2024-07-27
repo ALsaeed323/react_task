@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "../SignupForm/SignupForm.css";
+import "./SignupForm.css";
 
 function SignupForm(props) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();

@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   // Example login function
   const login = (userData) => setUser(userData);
 
+
   // Example logout function
   const logout = () => setUser(null);
 

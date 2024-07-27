@@ -1,6 +1,6 @@
 // components/Illustration.js
 import React from "react";
-import "../Illustration/Illustration.css";
+import "./Illustration.css";
 
 function Illustration() {
   return (

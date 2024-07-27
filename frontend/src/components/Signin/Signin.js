@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import SigninForm from './SigninForm/SigninForm';
 import Illustration from '../Illustration/Illustration';
 import Logo from '../Logo';
 import '../Signup/Signup.css';
+import '../Signup/SignupForm/SignupForm.css';
 
 function Signin() {
   const [successMessage, setSuccessMessage] = useState('');
@@ -12,25 +13,34 @@ function Signin() {
   const navigate = useNavigate();
 
   function signInHandler(userData) {
-    fetch('https://react-5053d-default-rtdb.firebaseio.com/users.json', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    fetch('https://react-5053d-default-rtdb.firebaseio.com/users.json')
       .then(response => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Failed to sign in user');
+          throw new Error('Failed to fetch users');
         }
       })
       .then(data => {
-        setSuccessMessage('User signed in successfully!');
-        console.log('User signed in successfully!');
-        login(userData); // Set user data in context
-        navigate('/'); // Redirect to the home page or any other page
+        const users = data || {};
+        const user = Object.values(users).find(
+          u => u.email === userData.email && u.password === userData.password
+        );
+
+        if (user) {
+          setSuccessMessage('User signed in successfully!');
+          login(user); // Set fetched user data in context
+
+          if (user.role === 'user') {
+            navigate('/profile');
+          } else if (user.role === 'admin') {
+            navigate('/dashboard');
+          } else {
+            navigate('/signup');
+          }
+        } else {
+          throw new Error('Invalid email or password');
+        }
       })
       .catch(error => {
         console.error('Error signing in:', error);
